@@ -41,4 +41,115 @@
 $(window).bind("scroll",function(){if($(this).scrollTop()>100){$(".top-bar").removeClass("tb-large").addClass("tb-small")}else{$(".top-bar").removeClass("tb-small").addClass("tb-large")}});$(".home-c-slider").bxSlider({mode:"horizontal",pager:false,controls:true,nextText:'<i class="bs-right fa fa-angle-right"></i>',prevText:'<i class="bs-left fa fa-angle-left"></i>'});$(".home-bg-slider").bxSlider({mode:"fade",auto:true,speed:1e3,pager:false,controls:false,nextText:'<i class="bs-right fa fa-angle-right"></i>',prevText:'<i class="bs-left fa fa-angle-left"></i>'});$(".home-bgc-slider").bxSlider({mode:"fade",pager:true,controls:true,nextText:'<i class="bs-right fa fa-angle-right"></i>',prevText:'<i class="bs-left fa fa-angle-left"></i>'});$(".quote-slider").bxSlider({mode:"horizontal",controls:false,adaptiveHeight:true});$(".img-slider").bxSlider({mode:"fade",pager:true,controls:true,nextText:'<i class="bs-right fa fa-angle-right"></i>',prevText:'<i class="bs-left fa fa-angle-left"></i>'});$(function(){var e=$(".services-slider");e.owlCarousel({pagination:false,navigation:false,items:4,itemsDesktop:[1e3,3],itemsTablet:[600,2],itemsMobile:[321,1]});$(".serv-next").click(function(){e.trigger("owl.next")});$(".serv-prev").click(function(){e.trigger("owl.prev")})});$(function(){var e=$(".employee-slider");e.owlCarousel({pagination:false,navigation:false,items:4,itemsDesktop:[1e3,3],itemsTablet:[600,2],itemsMobile:[321,1]});$(".emp-next").click(function(){e.trigger("owl.next")});$(".emp-prev").click(function(){e.trigger("owl.prev")})});$(function(){var e=$(".work-slider");e.owlCarousel({pagination:false,navigation:false,items:3,itemsDesktop:[1e3,3],itemsTablet:[600,2],itemsMobile:[321,1]});$(".work-next").click(function(){e.trigger("owl.next")});$(".work-prev").click(function(){e.trigger("owl.prev")})});$(".promo-control").click(function(){$(".footer-promo").slideToggle(500);if($(".footer-promo").is(":visible")){$("html, body").animate({scrollTop:$(".footer-promo").offset().top},500)}});$(function(){$("#contactform").submit(function(){var e=$(this).attr("action");$("#message").slideUp(300,function(){$("#message").hide();$("#submit").after('<img src="images/loader.gif" class="loader">').attr("disabled","disabled");$.post(e,{name:$("#name").val(),email:$("#email").val(),phone:$("#phone").val(),subject:$("#subject").val(),comments:$("#comments").val(),verify:$("#verify").val()},function(e){document.getElementById("message").innerHTML=e;$("#message").slideDown(300);$("#contactform img.loader").fadeOut(300,function(){$(this).remove()});$("#submit").removeAttr("disabled");if(e.match("success")!=null)$("#contactform").slideUp(300)})});return false})});$(function(){$(".scrollto").bind("click.scrollto",function(e){e.preventDefault();var t=this.hash,n=$(t);$("html, body").stop().animate({scrollTop:n.offset().top-0},900,"swing",function(){window.location.hash=t})})});$(".popup").magnificPopup({type:"image",fixedContentPos:false,fixedBgPos:false,removalDelay:300,mainClass:"mfp-fade"});$(".popup-youtube, .popup-vimeo, .popup-gmaps").magnificPopup({disableOn:700,type:"iframe",fixedContentPos:false,fixedBgPos:false,removalDelay:300,mainClass:"mfp-fade",preloader:false});$(".popup-gallery").magnificPopup({type:"image",gallery:{enabled:true},fixedContentPos:false,fixedBgPos:false,removalDelay:300,mainClass:"mfp-fade"});$(document).ready(function(){$(".equal").children(".col").equalizeHeight();$(window).resize(function(){$(".equal").children(".col").equalizeHeight()})});$(".responsive-video").fitVids()
 
 })(jQuery);
+(function ($) {
 
+//jQuery for page scrolling feature - requires jQuery Easing plugin
+$(function() {
+  $('.navbar-nav li a').bind('click', function(event) {
+    var $anchor = $(this);
+    var nav = $($anchor.attr('href'));
+    if (nav.length) {
+    $('html, body').stop().animate({
+      scrollTop: $($anchor.attr('href')).offset().top
+    }, 1500, 'easeInOutExpo');
+
+    event.preventDefault();
+    }
+  });
+
+});
+
+$('body').flipLightBox({
+
+  lightbox_text_status: 0,
+  lightbox_navigation_status: 0
+
+})
+
+$('.parallax-window').parallax({imageSrc: 'img/3.png'});
+
+
+
+})(jQuery);
+jQuery(document).ready(function($) {
+
+	$('#myCarousel').carousel({
+					interval: 5000
+	})
+
+	$('#carousel-text').html($('#slide-content-0').html());
+
+	//Handles the carousel thumbnails
+	$('[id^=carousel-selector-]').click( function(){
+					var id_selector = $(this).attr("id");
+					var id = id_selector.substr(id_selector.length -1);
+					var id = parseInt(id);
+					$('#myCarousel').carousel(id);
+	});
+
+
+	// When the carousel slides, auto update the text
+	$('#myCarousel').on('slid.bs.carousel', function () {
+					var id = $('.item.active').data('slide-number');
+					$('#carousel-text').html($('#slide-content-'+id).html());
+	});
+});
+$(window).load(function(){
+
+	$('.main-nav li a').bind('click',function(event){
+		var $anchor = $(this);
+
+		$('html, body').stop().animate({
+			scrollTop: $($anchor.attr('href')).offset().top - 102
+		}, 1500,'easeInOutExpo');
+		/*
+		if you don't want to use the easing effects:
+		$('html, body').stop().animate({
+			scrollTop: $($anchor.attr('href')).offset().top
+		}, 1000);
+		*/
+		event.preventDefault();
+	});
+})
+$(window).load(function(){
+
+
+  var $container = $('.portfolioContainer'),
+      $body = $('body'),
+      colW = 375,
+      columns = null;
+
+
+  $container.isotope({
+    // disable window resizing
+    resizable: true,
+    masonry: {
+      columnWidth: colW
+    }
+  });
+
+  $(window).smartresize(function(){
+    // check if columns has changed
+    var currentColumns = Math.floor( ( $body.width() -30 ) / colW );
+    if ( currentColumns !== columns ) {
+      // set new column count
+      columns = currentColumns;
+      // apply width to container manually, then trigger relayout
+      $container.width( columns * colW )
+        .isotope('reLayout');
+    }
+
+  }).smartresize(); // trigger resize to set container width
+  $('.portfolioFilter a').click(function(){
+        $('.portfolioFilter .current').removeClass('current');
+        $(this).addClass('current');
+
+        var selector = $(this).attr('data-filter');
+        $container.isotope({
+
+            filter: selector,
+         });
+         return false;
+    });
+
+});
