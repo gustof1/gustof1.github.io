@@ -2,9 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
 @import url('font-awesome.css');
 /*
-
 	Style.css
-
 	01. Basics
 	02. Top bar
 	03. Home
@@ -18,7 +16,6 @@
 	11. Footer
 	12. 404 Page
 	13. Responsive settings
-
 */
 
 
@@ -131,10 +128,9 @@ blockquote{
 	font-style:italic;
 	font-weight:400;
 	font-size:1.25em;
-	padding:25px;
-	background:#fafafa;
-	border-left:5px solid #eee;
-	margin-bottom:25px
+	padding:15px;
+	border-left:1px;
+	margin-bottom:5px
 }
 
 blockquote small{
